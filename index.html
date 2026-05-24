@@ -34,8 +34,8 @@ body{
 /* HEADER */
 .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;position:relative;z-index:2}
 .brand{display:flex;align-items:center;gap:18px}
-.logo-box-real{height:78px;display:flex;align-items:center;justify-content:center;padding:12px 22px;background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(230,0,19,0.30);position:relative;border:1px solid rgba(255,255,255,0.10)}
-.logo-box-real img{height:54px;width:auto;display:block;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.logo-box-real{flex:0 0 auto;min-width:200px;height:78px;display:flex;align-items:center;justify-content:center;padding:12px 22px;background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(230,0,19,0.30);position:relative;border:1px solid rgba(255,255,255,0.10);overflow:visible}
+.logo-box-real img{height:54px;width:auto;max-width:none;display:block;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .brand-text{line-height:1.15}
 .brand-text .unit{font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
 .tagline{text-align:right}
