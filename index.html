@@ -2,1100 +2,799 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roadmap Warped RPG — Meta Ads</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<title>Roadmap — Warped RPG | V4 Company Dantas</title>
 <style>
-  :root {
-    --yellow: #f5d800;
-    --yellow-dim: #a89500;
-    --bg: #1a1500;
-    --bg2: #110f00;
-    --bg3: #221c00;
-    --wall: #2e2600;
-    --text: #e8d87a;
-    --text-dim: #8a7d3a;
-    --white: #fff8d6;
-    --green: #7dff91;
-    --orange: #ff9d3a;
-    --red: #ff4f4f;
-    --blue: #3ad6ff;
-    --purple: #c084fc;
-    --pipe: #f5d80088;
-    --shadow: #f5d80033;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg2);
-    color: var(--text);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    overflow-x: hidden;
-    cursor: crosshair;
-  }
-
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(var(--wall) 1px, transparent 1px),
-      linear-gradient(90deg, var(--wall) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.35;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  body::after {
-    content: '';
-    position: fixed; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, #f5d80008 0%, transparent 70%);
-    animation: flicker 8s infinite;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  @keyframes flicker {
-    0%,100% { opacity: 1; }
-    92% { opacity: 1; } 93% { opacity: 0.4; }
-    94% { opacity: 1; } 97% { opacity: 0.7; }
-    98% { opacity: 1; }
-  }
-
-  header {
-    position: relative; z-index: 10;
-    text-align: center;
-    padding: 48px 24px 32px;
-    border-bottom: 1px solid var(--yellow-dim);
-    background: linear-gradient(180deg, #0a0800 0%, transparent 100%);
-  }
-
-  .header-tag {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--yellow-dim);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    animation: pulse-text 3s infinite;
-  }
-
-  @keyframes pulse-text {
-    0%,100% { opacity: 1; } 50% { opacity: 0.6; }
-  }
-
-  header h1 {
-    font-family: 'Orbitron', monospace;
-    font-size: clamp(22px, 5vw, 48px);
-    font-weight: 900;
-    color: var(--yellow);
-    text-shadow: 0 0 30px var(--yellow), 0 0 60px #f5d80066;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-
-  header p {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 13px;
-    color: var(--text-dim);
-    letter-spacing: 2px;
-  }
-
-  main {
-    position: relative; z-index: 10;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
-    display: flex; flex-direction: column;
-    gap: 0;
-  }
-
-  .flow-block {
-    position: relative;
-    display: flex; flex-direction: column;
-    align-items: flex-start; gap: 24px;
-    padding: 32px 28px;
-    background: var(--bg3);
-    border: 1px solid var(--yellow-dim);
-    border-left: 4px solid var(--yellow);
-    box-shadow: 0 0 24px var(--shadow), inset 0 0 40px #0005;
-    border-radius: 2px;
-    margin-bottom: 0;
-    transition: box-shadow .3s;
-  }
-
-  .flow-block:hover {
-    box-shadow: 0 0 40px #f5d80055, inset 0 0 40px #0005;
-  }
-
-  .section-label {
-    display: flex; align-items: center; gap: 12px;
-    width: 100%; margin-bottom: 4px;
-  }
-
-  .section-num {
-    font-family: 'Orbitron', monospace;
-    font-size: 11px;
-    background: var(--yellow); color: #000;
-    font-weight: 900; padding: 3px 8px;
-    letter-spacing: 1px; border-radius: 2px;
-    flex-shrink: 0;
-    box-shadow: 0 0 10px var(--yellow-dim);
-  }
-
-  .section-title {
-    font-family: 'Orbitron', monospace;
-    font-size: clamp(13px, 2.5vw, 18px);
-    font-weight: 700; color: var(--yellow);
-    text-shadow: 0 0 15px #f5d80066;
-    letter-spacing: 1px;
-  }
-
-  .section-date {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px; color: var(--text-dim);
-    margin-left: auto; flex-shrink: 0;
-    letter-spacing: 1px;
-  }
-
-  .section-desc {
-    font-size: 14px; color: var(--text-dim);
-    font-family: 'Share Tech Mono', monospace;
-    letter-spacing: 1px;
-    margin-top: -8px; margin-bottom: 4px;
-  }
-
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px; width: 100%;
-  }
-
-  .card {
-    background: var(--bg2);
-    border: 1px solid #3a3000;
-    border-top: 2px solid var(--yellow-dim);
-    padding: 18px 16px;
-    border-radius: 2px;
-    transition: border-color .2s, box-shadow .2s;
-    position: relative; overflow: hidden;
-  }
-
-  .card::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, #f5d80006 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .card:hover {
-    border-color: var(--yellow);
-    box-shadow: 0 0 16px #f5d80033;
-  }
-
-  .card-icon { font-size: 22px; margin-bottom: 8px; display: block; }
-
-  .card-title {
-    font-family: 'Orbitron', monospace;
-    font-size: 12px; font-weight: 700;
-    color: var(--yellow); letter-spacing: 1px;
-    margin-bottom: 8px; text-transform: uppercase;
-  }
-
-  .card-body {
-    font-size: 14px; color: var(--text); line-height: 1.6;
-  }
-
-  .card.green { border-top-color: var(--green); }
-  .card.green .card-title { color: var(--green); text-shadow: 0 0 10px #7dff9155; }
-  .card.orange { border-top-color: var(--orange); }
-  .card.orange .card-title { color: var(--orange); text-shadow: 0 0 10px #ff9d3a55; }
-  .card.blue { border-top-color: var(--blue); }
-  .card.blue .card-title { color: var(--blue); text-shadow: 0 0 10px #3ad6ff55; }
-  .card.red { border-top-color: var(--red); }
-  .card.red .card-title { color: var(--red); text-shadow: 0 0 10px #ff4f4f55; }
-  .card.purple { border-top-color: var(--purple); }
-  .card.purple .card-title { color: var(--purple); text-shadow: 0 0 10px #c084fc55; }
-
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-
-  .tag {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px; padding: 3px 10px;
-    border-radius: 2px;
-    background: #f5d80015;
-    border: 1px solid var(--yellow-dim);
-    color: var(--yellow);
-    letter-spacing: 1px;
-  }
-
-  .tag.green { background: #7dff9115; border-color: var(--green); color: var(--green); }
-  .tag.orange { background: #ff9d3a15; border-color: var(--orange); color: var(--orange); }
-  .tag.blue { background: #3ad6ff15; border-color: var(--blue); color: var(--blue); }
-  .tag.red { background: #ff4f4f15; border-color: var(--red); color: var(--red); }
-  .tag.purple { background: #c084fc15; border-color: var(--purple); color: var(--purple); }
-
-  .pillars {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px; width: 100%;
-  }
-
-  @media (max-width: 600px) {
-    .pillars { grid-template-columns: 1fr; }
-    .cards-grid { grid-template-columns: 1fr; }
-  }
-
-  .pillar {
-    background: var(--bg2);
-    border: 1px solid #3a3000;
-    padding: 20px 16px;
-    border-radius: 2px;
-    text-align: center;
-    position: relative; overflow: hidden;
-  }
-
-  .pillar-num {
-    font-family: 'Orbitron', monospace;
-    font-size: 36px; font-weight: 900;
-    color: #f5d80020;
-    position: absolute; top: 8px; right: 12px;
-    line-height: 1;
-  }
-
-  .pillar-icon { font-size: 28px; margin-bottom: 10px; display: block; }
-
-  .pillar-q {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px; color: var(--text-dim);
-    letter-spacing: 2px; margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-
-  .pillar-title {
-    font-family: 'Orbitron', monospace;
-    font-size: 12px; font-weight: 700;
-    color: var(--yellow); margin-bottom: 8px;
-    letter-spacing: 1px;
-  }
-
-  .pillar-body {
-    font-size: 13px; color: var(--text); line-height: 1.5;
-  }
-
-  /* COUNTDOWN BAR */
-  .countdown-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px; width: 100%;
-  }
-
-  @media (max-width: 600px) { .countdown-row { grid-template-columns: repeat(2, 1fr); } }
-
-  .count-card {
-    background: var(--bg2);
-    border: 1px solid var(--yellow-dim);
-    padding: 18px 12px;
-    border-radius: 2px;
-    text-align: center;
-    box-shadow: 0 0 12px #f5d80022;
-  }
-
-  .count-num {
-    font-family: 'Orbitron', monospace;
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 900;
-    color: var(--yellow);
-    text-shadow: 0 0 20px var(--yellow), 0 0 40px #f5d80055;
-    line-height: 1; margin-bottom: 6px;
-    display: block;
-  }
-
-  .count-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px; color: var(--text-dim);
-    letter-spacing: 2px; text-transform: uppercase;
-  }
-
-  /* DIVIDER */
-  .divider {
-    display: flex; align-items: center;
-    gap: 12px; width: 100%;
-    margin: 8px 0;
-  }
-
-  .divider::before, .divider::after {
-    content: ''; flex: 1; height: 1px;
-    background: #3a3000;
-  }
-
-  .divider-text {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px; color: var(--text-dim);
-    letter-spacing: 3px; text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  /* NOISE OVERLAY */
-  .noise {
-    position: fixed; inset: 0;
-    z-index: 1; pointer-events: none;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-  }
-
-  /* FOOTER */
-  footer {
-    position: relative; z-index: 10;
-    text-align: center;
-    padding: 24px;
-    border-top: 1px solid #3a3000;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px; color: var(--text-dim);
-    letter-spacing: 2px;
-  }
-
-  .scanlines {
-    position: fixed; inset: 0;
-    z-index: 2; pointer-events: none;
-    background: repeating-linear-gradient(
-      0deg, transparent, transparent 2px,
-      #00000015 2px, #00000015 4px
-    );
-  }
-
-  .warn-banner {
-    position: relative; z-index: 10;
-    background: #1a1200;
-    border-top: 2px solid var(--yellow);
-    border-bottom: 2px solid var(--yellow);
-    padding: 10px 24px;
-    text-align: center;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12px; color: var(--yellow);
-    letter-spacing: 3px;
-    animation: pulse-text 4s infinite;
-    overflow: hidden;
-  }
-
-  .warn-scroll {
-    display: inline-block;
-    animation: scroll-warn 22s linear infinite;
-    white-space: nowrap;
-  }
-
-  @keyframes scroll-warn {
-    from { transform: translateX(50vw); }
-    to { transform: translateX(-100%); }
-  }
-
-  .flow-connector-label {
-    display: flex; align-items: center;
-    gap: 10px; height: 64px; position: relative;
-  }
-
-  .flow-connector-label::before {
-    content: ''; position: absolute;
-    left: 30px; top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, var(--yellow-dim), var(--yellow));
-    box-shadow: 0 0 8px var(--yellow-dim);
-  }
-
-  .fcl-badge {
-    position: absolute; left: 52px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px; color: var(--yellow);
-    background: var(--bg3);
-    border: 1px solid var(--yellow-dim);
-    padding: 3px 10px;
-    border-radius: 20px;
-    letter-spacing: 1px;
-    white-space: nowrap;
-  }
-
-  .flow-dot {
-    position: absolute; left: 23px; top: 50%;
-    transform: translateY(-50%);
-    width: 17px; height: 17px;
-    border-radius: 50%;
-    background: var(--yellow);
-    box-shadow: 0 0 12px var(--yellow);
-    animation: pulse-dot 1.5s ease-in-out infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%,100% { box-shadow: 0 0 8px var(--yellow); }
-    50% { box-shadow: 0 0 20px var(--yellow), 0 0 40px #f5d80044; }
-  }
-
-  /* CAMPAIGN BOX (highlighted) */
-  .campaign-box {
-    background: var(--bg2);
-    border: 1px solid var(--yellow);
-    border-left: 4px solid var(--yellow);
-    padding: 16px 18px;
-    width: 100%;
-    border-radius: 2px;
-    box-shadow: 0 0 18px #f5d80022;
-  }
-
-  .campaign-head {
-    display: flex; align-items: center;
-    gap: 10px; margin-bottom: 10px;
-    flex-wrap: wrap;
-  }
-
-  .campaign-name {
-    font-family: 'Orbitron', monospace;
-    font-size: 13px; font-weight: 700;
-    color: var(--yellow); letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .campaign-meta {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px; color: var(--text-dim);
-    letter-spacing: 1px;
-    margin-left: auto;
-  }
-
-  .campaign-body { font-size: 14px; color: var(--text); line-height: 1.6; }
-
-  .campaign-body strong { color: var(--yellow); }
-
-  /* KPI ROW */
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px; width: 100%; margin-top: 12px;
-  }
-
-  .kpi {
-    background: #0a0800;
-    border: 1px dashed #3a3000;
-    padding: 10px 12px;
-    border-radius: 2px;
-  }
-
-  .kpi-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px; color: var(--text-dim);
-    letter-spacing: 2px; text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .kpi-value {
-    font-family: 'Orbitron', monospace;
-    font-size: 13px; color: var(--yellow);
-    font-weight: 700;
-  }
-
-  /* AUDIENCE TAG ROW */
-  .aud-row {
-    background: #0a0800;
-    border-left: 3px solid var(--blue);
-    padding: 10px 14px;
-    margin-top: 8px;
-  }
-
-  .aud-row-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px; color: var(--blue);
-    letter-spacing: 2px; text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .aud-row-text { font-size: 13px; color: var(--text); }
-
+:root{
+  --red:#E60013;
+  --red-soft:#FF1A2C;
+  --red-glow:rgba(230,0,19,0.45);
+  --bg:#070708;
+  --bg2:#0F0F12;
+  --card:#16161A;
+  --card-hover:#1E1E24;
+  --line:#26262C;
+  --text:#FFFFFF;
+  --muted:#8A8A95;
+  --empty:#0A0A0D;
+  --warped:#C9A227;
+  --warped-glow:rgba(201,162,39,0.40);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter','SF Pro Display',-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{
+  background:
+    radial-gradient(800px 600px at 15% -10%, rgba(230,0,19,0.18), transparent 60%),
+    radial-gradient(900px 700px at 110% 110%, rgba(230,0,19,0.10), transparent 55%),
+    linear-gradient(180deg,#050506 0%, #0B0B0E 100%);
+  min-height:100vh;
+  padding:32px 44px 40px;
+}
+.watermark{position:fixed;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:200px;letter-spacing:.04em;color:rgba(230,0,19,0.04);font-family:'Inter Black',sans-serif;user-select:none;z-index:0}
+
+/* HEADER */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:18px}
+.logo-box-real{height:78px;display:flex;align-items:center;justify-content:center;padding:12px 22px;background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(230,0,19,0.30);position:relative;border:1px solid rgba(255,255,255,0.10)}
+.logo-box-real img{height:54px;width:auto;display:block;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.brand-text{line-height:1.15}
+.brand-text .unit{font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
+.tagline{text-align:right}
+.tagline .small{font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+.tagline .big{font-weight:800;font-size:15px;margin-top:3px}
+.tagline .big span{color:var(--red)}
+
+/* TITLE */
+.title-block{position:relative;z-index:2;display:flex;align-items:end;justify-content:space-between;margin:8px 0 14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.title-left h1{font-weight:900;font-size:38px;line-height:1;letter-spacing:-.02em}
+.title-left h1 .ac{color:var(--red);text-shadow:0 0 32px var(--red-glow)}
+.title-left .sub{margin-top:6px;display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.title-right{display:flex;flex-direction:column;gap:6px;text-align:right;font-size:11px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--red);border-radius:999px;color:var(--red);font-weight:700;letter-spacing:.16em;font-size:10px;text-transform:uppercase;box-shadow:0 0 0 4px rgba(230,0,19,0.06) inset}
+
+/* CLIENT CARD */
+.client{display:flex;align-items:center;gap:18px;padding:12px 18px;background:linear-gradient(135deg,rgba(230,0,19,0.10),rgba(230,0,19,0.0));border:1px solid var(--line);border-left:3px solid var(--red);border-radius:14px;margin-bottom:14px;position:relative;z-index:2}
+.client .avatar{width:46px;height:46px;font-size:16px;border-radius:50%;background:linear-gradient(135deg,#1F1F26,#0F0F13);display:flex;align-items:center;justify-content:center;border:1px solid var(--line);font-weight:900;font-size:22px;color:var(--red);box-shadow:0 0 0 1px rgba(230,0,19,0.18)}
+.client .info h3{font-size:15px;font-weight:800;letter-spacing:-.01em}
+.client .info p{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.02em}
+.client .info p strong{color:var(--text);font-weight:600}
+.client .stats{display:flex;gap:32px;margin-left:auto}
+.client .stat{text-align:right}
+.client .stat .lbl{font-size:9px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px}
+.client .stat .val{font-weight:800;font-size:13px}
+.client .stat .val span{color:var(--red)}
+
+/* COUNTDOWN */
+.countdown{display:flex;align-items:center;gap:10px;padding:10px 16px;background:linear-gradient(135deg,rgba(201,162,39,0.10),rgba(201,162,39,0.0));border:1px solid var(--warped);border-left:3px solid var(--warped);border-radius:14px;margin-bottom:16px;position:relative;z-index:2}
+.countdown .cd-lbl{font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.countdown .cd-lbl span{color:var(--warped);display:block;font-size:11px;margin-top:2px;letter-spacing:.04em;text-transform:none;font-weight:600}
+.countdown .cd-row{display:flex;gap:10px;margin-left:auto}
+.countdown .cd-box{background:#0A0A0D;border:1px solid rgba(201,162,39,0.30);border-radius:8px;padding:6px 12px;min-width:54px;text-align:center}
+.countdown .cd-num{font-weight:900;font-size:18px;color:var(--warped);text-shadow:0 0 12px var(--warped-glow);letter-spacing:-.02em;line-height:1}
+.countdown .cd-unit{font-size:8px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
+
+/* FLOW GRID */
+.flow{position:relative;z-index:2}
+.phase-row{display:grid;grid-template-columns: 100px repeat(4, 1fr);gap:10px;align-items:stretch}
+.phase-row.head{margin-bottom:8px}
+.phase-row.head .ph{
+  padding:10px 12px;text-align:center;border-radius:12px;
+  background:linear-gradient(180deg, rgba(230,0,19,0.16) 0%, rgba(230,0,19,0.04) 100%);
+  border:1px solid rgba(230,0,19,0.32);
+  font-weight:900;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  position:relative;
+  box-shadow:0 4px 14px rgba(230,0,19,0.10);
+}
+.phase-row.head .ph .num{display:inline-block;background:var(--red);color:#fff;font-size:11px;padding:3px 8px;border-radius:6px;margin-right:8px;letter-spacing:.1em;box-shadow:0 4px 12px var(--red-glow)}
+.phase-row.head .ph small{display:block;font-size:8px;color:var(--muted);font-weight:500;letter-spacing:.06em;margin-top:3px;text-transform:none}
+
+/* ROW LABEL */
+.cell-label{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:8px 6px;border-radius:12px;
+  background:linear-gradient(135deg,#15151A,#0C0C10);
+  border:1px solid var(--line);
+  position:relative;
+}
+.cell-label .channel-name{font-size:11px;font-weight:800;letter-spacing:.04em;line-height:1.2}
+.cell-label .pill-mini{display:block;font-size:7px;color:var(--red);letter-spacing:.14em;margin-bottom:3px;text-transform:uppercase;font-weight:700}
+.cell-label .channel-icon{margin-top:8px;display:flex;justify-content:center}
+.cell-label .channel-icon .icon-tile{width:26px;height:26px}
+.cell-label .channel-icon .icon-tile svg{width:18px;height:18px}
+
+/* CARDS */
+.row-data{margin-bottom:8px}
+.card{
+  background:linear-gradient(180deg,var(--card) 0%, #101014 100%);
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:10px 11px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;
+  position:relative;min-height:110px;
+  transition:transform .25s ease, border-color .25s ease;
+}
+.card:hover{transform:translateY(-3px);border-color:rgba(230,0,19,0.45)}
+.card .icons{display:flex;align-items:center;justify-content:center;gap:8px}
+.icon-tile{width:32px;height:32px;background:#0A0A0D;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.icon-tile svg{width:18px;height:18px}
+.icon-tile.brand-meta{background:#0A0A0D;border-color:rgba(8,102,255,0.30)}
+.icon-tile.brand-meta svg{width:100%;height:100%;border-radius:6px}
+.icon-tile.brand-ig{background:linear-gradient(135deg,#1A0B14,#0F0508);border-color:rgba(217,4,103,0.18)}
+.icon-tile.brand-yt{background:linear-gradient(135deg,#1A0808,#100404);border-color:rgba(255,0,0,0.28)}
+.icon-tile.dark{background:linear-gradient(135deg,#15151B,#0A0A0E)}
+.card .title{font-weight:800;font-size:11px;letter-spacing:-.01em;line-height:1.2}
+.card .desc{font-size:9px;color:var(--muted);line-height:1.35}
+.card .badge{position:absolute;top:10px;right:10px;font-size:8px;background:var(--red);padding:3px 7px;border-radius:6px;letter-spacing:.12em;font-weight:700}
+.card .badge.alt{background:transparent;border:1px solid var(--red);color:var(--red)}
+.card .badge.warped{background:var(--warped);color:#000}
+
+.card.hot{background:linear-gradient(180deg,rgba(230,0,19,0.10),#101014);border-color:rgba(230,0,19,0.30)}
+.card.warped-c{background:linear-gradient(180deg,rgba(201,162,39,0.08),#101014);border-color:rgba(201,162,39,0.30)}
+
+/* AUDIÊNCIA CONSTRUÍDA */
+.remarketing{
+  margin-top:6px;
+  background:linear-gradient(135deg, rgba(230,0,19,0.16) 0%, rgba(230,0,19,0.04) 100%);
+  border:1px solid rgba(230,0,19,0.36);
+  border-radius:12px;
+  padding:12px 16px;
+  display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:center;
+}
+.remarketing .lbl-rm{font-weight:900;font-size:11px;letter-spacing:.18em}
+.remarketing .lbl-rm span{display:block;font-size:8px;color:var(--muted);font-weight:500;letter-spacing:.04em;margin-top:4px;text-transform:none}
+.remarketing .cell{display:flex;align-items:center;gap:8px;font-size:9px;color:var(--muted);justify-content:flex-start}
+.remarketing .cell .icon-tile{width:28px;height:28px}
+.remarketing .cell .icon-tile svg{width:14px;height:14px}
+.remarketing .cell .lbl{text-align:left;line-height:1.3}
+.remarketing .cell .lbl strong{display:block;color:var(--text);font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+
+/* KPI STRIP */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;position:relative;z-index:2}
+.kpi{background:linear-gradient(180deg,var(--card) 0%, #101014 100%);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.kpi .left .lbl{font-size:8px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.kpi .left .val{font-weight:900;font-size:15px;margin-top:2px}
+.kpi .left .val span{color:var(--red)}
+.kpi .left .sub{font-size:11px;color:var(--muted);margin-top:2px}
+.kpi .icon{width:30px;height:30px;border-radius:10px;background:rgba(230,0,19,0.12);display:flex;align-items:center;justify-content:center;color:var(--red);border:1px solid rgba(230,0,19,0.30)}
+.kpi .icon svg{width:16px;height:16px}
+
+/* BUDGET STRIP */
+.budget-strip{margin-top:8px;background:linear-gradient(135deg,#16161A,#0D0D11);border:1px solid var(--line);border-radius:12px;padding:12px 18px;position:relative;z-index:2}
+.budget-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.badge-red{display:inline-block;background:var(--red);color:#fff;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:5px 11px;border-radius:6px;font-weight:800;box-shadow:0 4px 14px var(--red-glow)}
+.budget-head h4{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+.budget-grid{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center}
+.budget-total{padding:12px 14px;background:linear-gradient(135deg,rgba(230,0,19,0.12),rgba(230,0,19,0.02));border:1px solid rgba(230,0,19,0.35);border-radius:14px;text-align:center}
+.budget-total .budget-lbl{font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.budget-total .budget-val{font-weight:900;font-size:28px;line-height:1;letter-spacing:-.02em}
+.budget-total .budget-val span{color:var(--red);text-shadow:0 0 24px var(--red-glow)}
+.budget-total .budget-sub{font-size:9px;color:var(--muted);margin-top:6px;letter-spacing:.02em;line-height:1.4}
+.split-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.split-card{background:linear-gradient(180deg,var(--card),#101014);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.split-card-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.split-card-head .icon-tile{width:24px;height:24px}
+.split-card-head .icon-tile svg{width:13px;height:13px}
+.split-card-name{font-weight:800;font-size:10px;letter-spacing:-.01em}
+.split-card-pct{margin-left:auto;font-size:9px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.split-card-val{font-weight:900;font-size:16px;letter-spacing:-.02em;margin-top:4px}
+.split-card-val span{color:var(--red)}
+.split-card-desc{font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:.02em;line-height:1.4}
+
+/* DETAIL SECTION (campanha por campanha) */
+.section-block{margin-top:10px;background:linear-gradient(180deg,var(--card),#101014);border:1px solid var(--line);border-radius:12px;padding:14px 18px;position:relative;z-index:2}
+.section-block .sb-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.section-block .sb-head h3{font-size:13px;font-weight:900;letter-spacing:.02em;text-transform:uppercase}
+.section-block .sb-head .sb-sub{font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-left:auto}
+
+.camp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.camp-card{background:#0A0A0D;border:1px solid var(--line);border-radius:10px;padding:12px 14px;border-left:3px solid var(--red);position:relative}
+.camp-card.cam-a{border-left-color:#1877F2}
+.camp-card.cam-b{border-left-color:var(--red)}
+.camp-card.cam-c{border-left-color:var(--warped)}
+.camp-name{font-weight:900;font-size:11px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.camp-name .camp-id{background:var(--red);color:#fff;padding:2px 7px;border-radius:5px;font-size:9px;font-weight:800;letter-spacing:.1em}
+.cam-a .camp-name .camp-id{background:#1877F2}
+.cam-c .camp-name .camp-id{background:var(--warped);color:#000}
+.camp-meta{display:grid;grid-template-columns:1fr;gap:6px;font-size:10px;color:var(--muted);line-height:1.45}
+.camp-meta div{display:flex;gap:8px}
+.camp-meta div .k{color:var(--text);font-weight:700;min-width:78px;font-size:9px;letter-spacing:.06em;text-transform:uppercase}
+.camp-meta div .v{color:var(--muted);font-size:10px}
+
+/* CRONOGRAMA */
+.week-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.week-card{background:#0A0A0D;border:1px solid var(--line);border-top:3px solid var(--red);border-radius:10px;padding:12px 14px}
+.week-card.w2{border-top-color:#1877F2}
+.week-card.w3{border-top-color:var(--red)}
+.week-card.w4{border-top-color:var(--warped)}
+.week-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.week-head .wn{font-weight:900;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.week-head .wd{font-size:9px;color:var(--muted);letter-spacing:.06em}
+.week-card ul{list-style:none;padding:0;margin:0}
+.week-card li{font-size:10px;color:var(--muted);padding:4px 0;border-bottom:1px dashed rgba(255,255,255,0.04);line-height:1.4}
+.week-card li:last-child{border-bottom:none}
+.week-card li strong{color:var(--text);font-weight:600}
+
+/* CRIATIVOS LIST */
+.crit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.crit-card{background:#0A0A0D;border:1px solid var(--line);border-radius:10px;padding:12px 14px;position:relative}
+.crit-card .crit-tag{position:absolute;top:10px;right:12px;font-size:8px;background:rgba(230,0,19,0.18);color:var(--red);padding:3px 7px;border-radius:5px;letter-spacing:.12em;font-weight:700;border:1px solid rgba(230,0,19,0.40)}
+.crit-card.f2 .crit-tag{background:rgba(201,162,39,0.15);color:var(--warped);border-color:rgba(201,162,39,0.40)}
+.crit-card .crit-title{font-weight:800;font-size:12px;letter-spacing:-.01em;margin-bottom:6px;padding-right:60px}
+.crit-card .crit-meta{font-size:9px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.crit-card .crit-desc{font-size:10px;color:var(--muted);line-height:1.5}
+.crit-card .crit-desc em{color:var(--warped);font-style:normal;font-weight:600}
+
+/* YOUTUBE BLOCK */
+.yt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.yt-card{background:#0A0A0D;border:1px solid var(--line);border-left:3px solid #FF0000;border-radius:10px;padding:12px 14px;position:relative}
+.yt-card .yt-num{position:absolute;top:10px;right:14px;font-weight:900;font-size:20px;color:rgba(255,0,0,0.15);letter-spacing:-.04em}
+.yt-card .yt-title{font-weight:800;font-size:12px;margin-bottom:6px;padding-right:40px}
+.yt-card .yt-meta{font-size:9px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.yt-card .yt-desc{font-size:10px;color:var(--muted);line-height:1.5}
+
+/* FOOTER */
+.footer{margin-top:14px;display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--line);font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;position:relative;z-index:2}
+.footer strong{color:var(--text)}
+
+@media print {
+  *,*::before,*::after{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
+  html, body { background:#070708 !important; }
+  body { padding:22px 30px 26px !important; }
+  .card:hover { transform:none !important }
+  @page { size: A3 landscape; margin: 0; background:#070708; }
+}
 </style>
 </head>
 <body>
 
-<div class="noise"></div>
-<div class="scanlines"></div>
+<div class="watermark">WARPED</div>
 
-<div class="warn-banner">
-  <span class="warn-scroll">
-    ⚠ ROADMAP DE MÍDIA — WARPED RPG / INICIATIVA RPG &nbsp;|&nbsp; META ADS — RECONHECIMENTO + ENGAJAMENTO &nbsp;|&nbsp; EVENTO RIO 5–7 JUNHO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="brand">
+    <div class="logo-box-real">
+      <img src="data:image/png;base64,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" alt="V4 Company">
+    </div>
+    <div class="brand-text">
+      <div class="unit">Unidade Dantas</div>
+    </div>
+  </div>
+  <div class="tagline">
+    <div class="small">Nosso negócio</div>
+    <div class="big">é vender <span>o seu</span>.</div>
+  </div>
 </div>
 
-<header>
-  <div class="header-tag">// roadmap meta ads · v4 company</div>
-  <h1>WARPED × INICIATIVA RPG</h1>
-  <p>RECONHECIMENTO &amp; ENGAJAMENTO — MAIO A JUNHO 2026</p>
-</header>
-
-<main>
-
-  <!-- ═══════════════════════════════════════ CONTAGEM REGRESSIVA ═══════ -->
-  <div class="flow-block" style="border-left-color: var(--orange);">
-    <div class="section-label">
-      <span class="section-num" style="background: var(--orange);">⏳ D-DAY</span>
-      <span class="section-title" style="color: var(--orange);">Contagem regressiva — Iniciativa RPG</span>
-      <span class="section-date">Evento: 05/06/2026</span>
+<!-- TITLE -->
+<div class="title-block">
+  <div class="title-left">
+    <h1>WARPED <span class="ac">RPG</span></h1>
+    <div class="sub">
+      <span class="pill">Roadmap de Mídia</span>
+      <span>Meta Ads · YouTube · Reconhecimento + Engajamento (sem conversão)</span>
     </div>
-    <div class="section-desc">// Atualizada em tempo real — quanto falta para a invasão.</div>
+  </div>
+  <div class="title-right">
+    <div>Versão 1.0</div>
+    <div>Maio / 2026</div>
+    <div style="color:var(--red);font-weight:700">Confidencial</div>
+  </div>
+</div>
 
-    <div class="countdown-row">
-      <div class="count-card"><span class="count-num" id="cd-days">--</span><span class="count-label">Dias</span></div>
-      <div class="count-card"><span class="count-num" id="cd-hours">--</span><span class="count-label">Horas</span></div>
-      <div class="count-card"><span class="count-num" id="cd-mins">--</span><span class="count-label">Minutos</span></div>
-      <div class="count-card"><span class="count-num" id="cd-secs">--</span><span class="count-label">Segundos</span></div>
+<!-- CLIENT -->
+<div class="client">
+  <div class="avatar">W</div>
+  <div class="info">
+    <h3>Warped RPG · Starlit Studios</h3>
+    <p><strong>Jogo de RPG · Universo Warped</strong> &nbsp;·&nbsp; Rio de Janeiro — RJ &nbsp;·&nbsp; @warped_rpg</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="lbl">Janela do ciclo</div><div class="val"><span>24/05</span> → 20/06</div></div>
+    <div class="stat"><div class="lbl">Evento</div><div class="val">Iniciativa <span>RPG</span></div></div>
+    <div class="stat"><div class="lbl">Fases</div><div class="val"><span>2</span> · sem conversão</div></div>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="countdown">
+  <div class="cd-lbl">D-Day<span>Iniciativa RPG · 5, 6 e 7 de junho · Rio de Janeiro</span></div>
+  <div class="cd-row">
+    <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-unit">Dias</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-unit">Horas</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-unit">Min</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-unit">Seg</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ MATRIZ FASES x CANAIS ═══════════════════════════ -->
+<div class="flow">
+
+  <!-- HEADER ROW -->
+  <div class="phase-row head">
+    <div></div>
+    <div class="ph"><span class="num">01</span>Reconhecimento · Mistério<small>PRÉ · 24–29 mai · awareness puro</small></div>
+    <div class="ph"><span class="num">01</span>Reconhecimento · Revelação<small>PRÉ · 30 mai – 04 jun · hype + followers</small></div>
+    <div class="ph"><span class="num">02</span>Engajamento · Durante<small>EVENTO · 05–07 jun · presença ao vivo</small></div>
+    <div class="ph"><span class="num">02</span>Engajamento · Pós<small>PÓS · 08–20 jun · captura de audiência</small></div>
+  </div>
+
+  <!-- ROW 1: META ADS -->
+  <div class="phase-row row-data">
+    <div class="cell-label">
+      <div>
+        <span class="pill-mini">Canal 1</span>
+        <div class="channel-name">Meta Ads</div>
+        <div class="channel-icon">
+          <div class="icon-tile brand-meta">
+            <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path fill="#fff" d="M16.65 12.45h-2.96V21h-3.5v-8.55H8.05V9.5h2.14V7.65c0-2.27 1.18-3.6 3.79-3.6h2.18v2.95h-1.36c-.96 0-1.11.46-1.11 1.17V9.5h2.49l-.53 2.95z"/></svg>
+          </div>
+          <div class="icon-tile brand-ig" style="margin-left:6px">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#E1306C" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icons">
+        <div class="icon-tile brand-ig"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#E1306C" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/></svg></div>
+        <div class="icon-tile dark"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="title">Teasers de Mistério</div>
+      <div class="desc">3 estáticos com locais conhecidos do Rio vazios + Stories. "Você já esteve aqui antes?" — sem revelar marca. Geo RJ+50km</div>
+      <div class="badge">F1</div>
+    </div>
+
+    <div class="card">
+      <div class="icons">
+        <div class="icon-tile brand-meta"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path fill="#fff" d="M16.65 12.45h-2.96V21h-3.5v-8.55H8.05V9.5h2.14V7.65c0-2.27 1.18-3.6 3.79-3.6h2.18v2.95h-1.36c-.96 0-1.11.46-1.11 1.17V9.5h2.49l-.53 2.95z"/></svg></div>
+        <div class="icon-tile brand-ig"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#E1306C" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/></svg></div>
+      </div>
+      <div class="title">Revelação + Carrossel + Followers</div>
+      <div class="desc">Cam A: Followers BR (nicho RPG/D&amp;D). Cam B: Alcance RJ 50km com revelação e contagem D-7 / D-3</div>
+      <div class="badge">F1</div>
+    </div>
+
+    <div class="card hot">
+      <div class="icons">
+        <div class="icon-tile brand-ig"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#E1306C" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/></svg></div>
+        <div class="icon-tile dark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z" stroke="#E60013" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="#E60013" stroke-width="1.6"/></svg></div>
+      </div>
+      <div class="title">Stories Geo 3km + Carrossel Stand</div>
+      <div class="desc">Cam B (geo cirúrgica 3km do evento): Stories diário do stand. Carrossel ao vivo com pessoas jogando</div>
+      <div class="badge">F2</div>
+    </div>
+
+    <div class="card warped-c">
+      <div class="icons">
+        <div class="icon-tile brand-ig"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#E1306C" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/></svg></div>
+        <div class="icon-tile brand-meta"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path fill="#fff" d="M16.65 12.45h-2.96V21h-3.5v-8.55H8.05V9.5h2.14V7.65c0-2.27 1.18-3.6 3.79-3.6h2.18v2.95h-1.36c-.96 0-1.11.46-1.11 1.17V9.5h2.49l-.53 2.95z"/></svg></div>
+      </div>
+      <div class="title">Cortes Reels + Highlights</div>
+      <div class="desc">Cam C: impulsiona Reels com melhores momentos + depoimentos. Objetivo: construir custom audience pra ciclos futuros</div>
+      <div class="badge warped">F2</div>
     </div>
   </div>
 
-  <!-- CONNECTOR -->
-  <div class="flow-connector-label">
-    <div class="flow-dot"></div>
-    <span class="fcl-badge">▼ panorama estratégico</span>
-  </div>
-
-  <!-- ═══════════════════════════════════════ OBJETIVOS ═══════ -->
-  <div class="flow-block">
-    <div class="section-label">
-      <span class="section-num">OBJETIVOS</span>
-      <span class="section-title">Dois Focos — Sem Conversão</span>
-      <span class="section-date">visão geral</span>
-    </div>
-    <div class="section-desc">// Esta campanha não vende — constrói audiência e burburinho local.</div>
-
-    <div class="pillars">
-      <div class="pillar">
-        <div class="pillar-num">01</div>
-        <span class="pillar-icon">📈</span>
-        <div class="pillar-q">// foco · crescimento</div>
-        <div class="pillar-title">Instagram @warped_rpg</div>
-        <div class="pillar-body">
-          Campanhas segmentadas para <strong>nicho geek/RPG nacional</strong>. Objetivo: ganhar seguidores qualificados que vão consumir o universo Warped.
-        </div>
-      </div>
-
-      <div class="pillar">
-        <div class="pillar-num">02</div>
-        <span class="pillar-icon">📍</span>
-        <div class="pillar-q">// foco · burburinho local</div>
-        <div class="pillar-title">Alcance Evento Rio</div>
-        <div class="pillar-body">
-          Geo-segmentação: <strong>Rio de Janeiro + raio de 50km</strong>. Informar quem tem interesse em RPG sobre o evento — gerar hype até 05/06.
-        </div>
-      </div>
-
-      <div class="pillar">
-        <div class="pillar-num">03</div>
-        <span class="pillar-icon">🚫</span>
-        <div class="pillar-q">// fora do escopo</div>
-        <div class="pillar-title">Sem Conversão</div>
-        <div class="pillar-body">
-          Sem campanha de venda, sem CTA Catarse, sem checkout. <strong>Topo e meio de funil apenas.</strong> Conversão será trabalhada em ciclo futuro.
+  <!-- ROW 2: YOUTUBE -->
+  <div class="phase-row row-data">
+    <div class="cell-label">
+      <div>
+        <span class="pill-mini">Canal 2</span>
+        <div class="channel-name">YouTube</div>
+        <div class="channel-icon">
+          <div class="icon-tile brand-yt"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="3.5" fill="#FF0000"/><path d="M10 9l5.5 3L10 15V9z" fill="#fff"/></svg></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- CONNECTOR -->
-  <div class="flow-connector-label">
-    <div class="flow-dot"></div>
-    <span class="fcl-badge">▼ fase 1 · reconhecimento</span>
-  </div>
-
-  <!-- ═══════════════════════════════════════ FASE 1 ═══════ -->
-  <div class="flow-block">
-    <div class="section-label">
-      <span class="section-num">FASE 1</span>
-      <span class="section-title">Reconhecimento — Alcance &amp; Novos Seguidores</span>
-      <span class="section-date">24/05 → 04/06</span>
-    </div>
-    <div class="section-desc">// Construção de hype + crescimento de perfil. Sem revelar tudo.</div>
-
-    <!-- ─── Campanha A: Instagram Followers nacional ─── -->
-    <div class="campaign-box">
-      <div class="campaign-head">
-        <span class="campaign-name">🎯 Campanha A · Crescimento Instagram</span>
-        <span class="campaign-meta">Meta Ads · Objetivo: Engajamento → Seguidores</span>
+    <div class="card">
+      <div class="icons">
+        <div class="icon-tile brand-yt"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="3.5" fill="#FF0000"/><path d="M10 9l5.5 3L10 15V9z" fill="#fff"/></svg></div>
       </div>
-      <div class="campaign-body">
-        Campanha de <strong>aquisição de seguidores qualificados</strong> em escala nacional. Apresentar o universo Warped pra quem ainda não conhece, transformando interesse em <em>follow</em>.
-      </div>
-
-      <div class="aud-row">
-        <div class="aud-row-label">// público-alvo</div>
-        <div class="aud-row-text">
-          <strong>BR · 18–40 anos · sem geo restritiva.</strong>
-          Interesses: D&amp;D, Tormenta, Critical Role, jogos de tabuleiro, jogos analógicos, RPG de mesa, Stranger Things, fantasia, cultura geek.
-          Comportamento: engajou com páginas de criadores de RPG nos últimos 90d.
-        </div>
-      </div>
-
-      <div class="kpi-row">
-        <div class="kpi"><div class="kpi-label">Objetivo Meta</div><div class="kpi-value">Engajamento</div></div>
-        <div class="kpi"><div class="kpi-label">Formato</div><div class="kpi-value">1:1 + Reels 9:16</div></div>
-        <div class="kpi"><div class="kpi-label">CTA</div><div class="kpi-value">Seguir página</div></div>
-        <div class="kpi"><div class="kpi-label">KPI principal</div><div class="kpi-value">Custo por seguidor</div></div>
-      </div>
+      <div class="title">Setup do Canal @warpedrpg</div>
+      <div class="desc">Criar canal · banner · descrição · playlist "Iniciativa RPG 2026". Identidade coordenada com universo Warped</div>
+      <div class="badge">F1</div>
     </div>
 
-    <!-- ─── Campanha B: Alcance Evento Rio 50km ─── -->
-    <div class="campaign-box" style="border-color: var(--blue); border-left-color: var(--blue); box-shadow: 0 0 18px #3ad6ff22;">
-      <div class="campaign-head">
-        <span class="campaign-name" style="color: var(--blue);">📍 Campanha B · Alcance Evento Rio (raio 50km)</span>
-        <span class="campaign-meta">Meta Ads · Objetivo: Alcance / Brand Awareness</span>
+    <div class="card">
+      <div class="icons">
+        <div class="icon-tile brand-yt"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="3.5" fill="#FF0000"/><path d="M10 9l5.5 3L10 15V9z" fill="#fff"/></svg></div>
+        <div class="icon-tile dark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" stroke="#fff" stroke-width="1.6"/></svg></div>
       </div>
-      <div class="campaign-body">
-        <strong>Informar quem tem interesse em RPG e está perto</strong> que a Iniciativa RPG vai acontecer.
-        Geo-segmentação cirúrgica: pin no <strong>Rio de Janeiro + 50km</strong>. Frequência alta na semana do evento.
-      </div>
-
-      <div class="aud-row" style="border-left-color: var(--blue);">
-        <div class="aud-row-label" style="color: var(--blue);">// público-alvo (raio 50km RJ)</div>
-        <div class="aud-row-text">
-          <strong>RJ · 18–40 anos · raio 50km do local do evento.</strong>
-          Interesses: RPG de mesa, D&amp;D, Tormenta, jogos analógicos, board games, eventos geek, cultura nerd.
-        </div>
-      </div>
-
-      <div class="kpi-row">
-        <div class="kpi"><div class="kpi-label">Objetivo Meta</div><div class="kpi-value">Alcance</div></div>
-        <div class="kpi"><div class="kpi-label">Formato</div><div class="kpi-value">1:1, 4:5 + Stories</div></div>
-        <div class="kpi"><div class="kpi-label">Frequência alvo</div><div class="kpi-value">3–5 / pessoa</div></div>
-        <div class="kpi"><div class="kpi-label">KPI principal</div><div class="kpi-value">Alcance único RJ</div></div>
-      </div>
+      <div class="title">Trailers + Convite Evento</div>
+      <div class="desc">2–3 vídeos curtos (60–90s) apresentando universo Warped + convite Iniciativa RPG. Cross-promo Instagram</div>
+      <div class="badge">F1</div>
     </div>
 
-    <div class="divider"><span class="divider-text">criativos por momento — fase 1</span></div>
-
-    <div class="cards-grid">
-      <div class="card">
-        <span class="card-icon">🌒</span>
-        <div class="card-title">Teasers de Mistério · 24–27/05</div>
-        <div class="card-body">
-          3 imagens estáticas — locais conhecidos do Rio vazios.<br>
-          Sem revelar marca/produto. Pergunta-âncora: <em>"Você já esteve aqui antes?"</em>
-        </div>
-        <div class="tags">
-          <span class="tag">Feed 1:1</span>
-          <span class="tag blue">RJ + 50km</span>
-        </div>
+    <div class="card hot">
+      <div class="icons">
+        <div class="icon-tile brand-yt"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="3.5" fill="#FF0000"/><path d="M10 9l5.5 3L10 15V9z" fill="#fff"/></svg></div>
+        <div class="icon-tile dark"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" fill="#E60013"/><circle cx="12" cy="12" r="9" stroke="#E60013" stroke-width="1.6"/></svg></div>
       </div>
+      <div class="title">Lives ao Vivo · 3 dias do evento</div>
+      <div class="desc">Transmissão diária do stand: partidas, mestres, atmosfera. Cross-promo Stories. Conteúdo longo indexado</div>
+      <div class="badge">F2</div>
+    </div>
 
-      <div class="card orange">
-        <span class="card-icon">⚡</span>
-        <div class="card-title">Revelação · 28–29/05</div>
-        <div class="card-body">
-          Conexão entre os teasers e o universo Warped.<br>
-          <em>"Algo está chegando ao Rio. Iniciativa RPG. 05 de junho."</em>
-        </div>
-        <div class="tags">
-          <span class="tag orange">Revelação</span>
-          <span class="tag">Feed 1:1 / 4:5</span>
-        </div>
+    <div class="card warped-c">
+      <div class="icons">
+        <div class="icon-tile brand-yt"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="3.5" fill="#FF0000"/><path d="M10 9l5.5 3L10 15V9z" fill="#fff"/></svg></div>
+        <div class="icon-tile dark"><svg viewBox="0 0 24 24" fill="none"><path d="M9 3h6l1 4h4v14H4V7h4l1-4z" stroke="#C9A227" stroke-width="1.6"/><circle cx="12" cy="14" r="3" stroke="#C9A227" stroke-width="1.6"/></svg></div>
       </div>
-
-      <div class="card green">
-        <span class="card-icon">🃏</span>
-        <div class="card-title">Carrossel Universo · 29/05–01/06</div>
-        <div class="card-body">
-          Carrossel 4–5 cards apresentando o universo Warped: lore, classes, atmosfera.<br>
-          CTA: <strong>seguir o perfil</strong>.
-        </div>
-        <div class="tags">
-          <span class="tag green">Carrossel</span>
-          <span class="tag green">Followers</span>
-        </div>
-      </div>
-
-      <div class="card blue">
-        <span class="card-icon">⏰</span>
-        <div class="card-title">Contagem Stories · D-7 e D-3</div>
-        <div class="card-body">
-          2 versões de Stories: <strong>D-7</strong> e <strong>D-3</strong> do evento.<br>
-          Número grande, contexto curto, âncora geográfica.
-        </div>
-        <div class="tags">
-          <span class="tag blue">Stories 9:16</span>
-          <span class="tag blue">RJ 50km</span>
-        </div>
-      </div>
+      <div class="title">Shorts + Entrevistas</div>
+      <div class="desc">1 Short/dia (30–60s) com melhores momentos. Entrevistas longas (3–5min) com participantes — prova social escalável</div>
+      <div class="badge warped">F2</div>
     </div>
   </div>
 
-  <!-- CONNECTOR -->
-  <div class="flow-connector-label">
-    <div class="flow-dot"></div>
-    <span class="fcl-badge">▼ fase 2 · engajamento durante e pós evento</span>
-  </div>
-
-  <!-- ═══════════════════════════════════════ FASE 2 ═══════ -->
-  <div class="flow-block">
-    <div class="section-label">
-      <span class="section-num">FASE 2</span>
-      <span class="section-title">Engajamento — Construção de Público</span>
-      <span class="section-date">05/06 → 15/06</span>
-    </div>
-    <div class="section-desc">// Conteúdo ao vivo + cortes. Construir público de remarketing para ciclos futuros.</div>
-
-    <!-- ─── Campanha C: Engajamento durante evento ─── -->
-    <div class="campaign-box" style="border-color: var(--green); border-left-color: var(--green); box-shadow: 0 0 18px #7dff9122;">
-      <div class="campaign-head">
-        <span class="campaign-name" style="color: var(--green);">💬 Campanha C · Engajamento Durante &amp; Pós</span>
-        <span class="campaign-meta">Meta Ads · Objetivo: Engajamento</span>
-      </div>
-      <div class="campaign-body">
-        Impulsionar conteúdo ao vivo do evento + cortes pós. <strong>Objetivo principal: construir público de engajamento</strong> (custom audience) pra ciclos futuros — quem reagiu, salvou, compartilhou, comentou ou assistiu vídeo do Warped.
-      </div>
-
-      <div class="aud-row" style="border-left-color: var(--green);">
-        <div class="aud-row-label" style="color: var(--green);">// público-alvo</div>
-        <div class="aud-row-text">
-          <strong>Custom audience:</strong> quem interagiu com os anúncios da Fase 1 nos últimos 14d + visitantes do perfil + Lookalike 1% de seguidores.
-          <br>
-          <strong>Geo:</strong> nacional (engajamento) + raio 3km do local do evento (Stories de chamada).
-        </div>
-      </div>
-
-      <div class="kpi-row">
-        <div class="kpi"><div class="kpi-label">Objetivo Meta</div><div class="kpi-value">Engajamento</div></div>
-        <div class="kpi"><div class="kpi-label">Formato</div><div class="kpi-value">Stories, Carrossel, Vídeo</div></div>
-        <div class="kpi"><div class="kpi-label">Public. resultado</div><div class="kpi-value">Custom Audience</div></div>
-        <div class="kpi"><div class="kpi-label">KPI principal</div><div class="kpi-value">Engagements + ThruPlay</div></div>
-      </div>
-    </div>
-
-    <div class="divider"><span class="divider-text">criativos por momento — fase 2</span></div>
-
-    <div class="cards-grid">
-      <div class="card blue">
-        <span class="card-icon">📡</span>
-        <div class="card-title">Stories Geolocalização · 05–07/06</div>
-        <div class="card-body">
-          Foto do stand tirada no próprio dia + texto.<br>
-          Raio <strong>3km</strong> do local do evento. 1 versão por dia.
-        </div>
-        <div class="tags">
-          <span class="tag blue">Stories 9:16</span>
-          <span class="tag blue">RJ 3km</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <span class="card-icon">🎮</span>
-        <div class="card-title">Carrossel do Stand · 05–07/06</div>
-        <div class="card-body">
-          4 cards com fotos reais do stand ao vivo: pessoas jogando, mestres conduzindo, atmosfera do universo Warped.
-        </div>
-        <div class="tags">
-          <span class="tag">Carrossel</span>
-          <span class="tag green">Prova social</span>
-        </div>
-      </div>
-
-      <div class="card green">
-        <span class="card-icon">✂️</span>
-        <div class="card-title">Cortes Pós-Evento · 09–15/06</div>
-        <div class="card-body">
-          Vídeos curtos (Reels) com os melhores momentos + entrevistas de participantes. <strong>Impulsionar pra engajamento</strong>, não follower.
-        </div>
-        <div class="tags">
-          <span class="tag green">Reels</span>
-          <span class="tag green">Engajamento</span>
-        </div>
-      </div>
-
-      <div class="card orange">
-        <span class="card-icon">📣</span>
-        <div class="card-title">Highlights Estática · 12–15/06</div>
-        <div class="card-body">
-          Imagens estáticas com depoimentos curtos de participantes. Recap visual da experiência Warped.
-        </div>
-        <div class="tags">
-          <span class="tag orange">Feed</span>
-          <span class="tag">Depoimento</span>
-        </div>
-      </div>
+  <!-- AUDIÊNCIA CONSTRUÍDA -->
+  <div class="remarketing">
+    <div class="lbl-rm">PÚBLICO CONSTRUÍDO<span>Resultado das 2 fases · base pra ciclos futuros</span></div>
+    <div class="cell">
+      <div class="icon-tile brand-meta"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path fill="#fff" d="M16.65 12.45h-2.96V21h-3.5v-8.55H8.05V9.5h2.14V7.65c0-2.27 1.18-3.6 3.79-3.6h2.18v2.95h-1.36c-.96 0-1.11.46-1.11 1.17V9.5h2.49l-.53 2.95z"/></svg></div>
+      <div class="icon-tile brand-ig" style="margin-left:-4px"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#E1306C" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/></svg></div>
+      <div class="lbl"><strong>Custom Audience Meta + Inscritos YouTube</strong>Quem interagiu nos anúncios + assistiu vídeos + seguiu perfil + visitou stand fica em base segmentada pra reativar quando entrar fase de conversão (Catarse, lançamento, etc)</div>
     </div>
   </div>
+</div>
 
-  <!-- CONNECTOR -->
-  <div class="flow-connector-label">
-    <div class="flow-dot"></div>
-    <span class="fcl-badge">▼ canal complementar · youtube</span>
+<!-- DIRECIONADORES ESTRATÉGICOS -->
+<div class="kpi-strip">
+  <div class="kpi"><div class="left"><div class="lbl">Foco principal</div><div class="val">Crescimento <span>@warped_rpg</span></div><div class="sub">+ alcance qualificado evento RJ</div></div><div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 17l6-6 4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7h7v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+  <div class="kpi"><div class="left"><div class="lbl">Estratégia âncora</div><div class="val"><span>Burburinho</span> local</div><div class="sub">RJ + raio 50km · frequência alta</div></div><div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg></div></div>
+  <div class="kpi"><div class="left"><div class="lbl">Pico de mídia</div><div class="val"><span>D-7</span> ao D+3</div><div class="sub">Concentração na semana do evento</div></div><div class="icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div></div>
+  <div class="kpi"><div class="left"><div class="lbl">Fora do escopo</div><div class="val"><span>Conversão</span> · zero</div><div class="sub">Sem Catarse, sem venda nesta fase</div></div><div class="icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M6 6l12 12" stroke="currentColor" stroke-width="1.7"/></svg></div></div>
+</div>
+
+<!-- ═══════════════════════════ DETALHAMENTO CAMPANHAS META ADS ═══════════════════ -->
+<div class="section-block">
+  <div class="sb-head">
+    <span class="badge-red">Campanhas Meta Ads</span>
+    <h3>Estrutura no Gerenciador · 3 campanhas · sem conversão</h3>
+    <span class="sb-sub">Configuração no Business Manager</span>
   </div>
 
-  <!-- ═══════════════════════════════════════ YOUTUBE ═══════ -->
-  <div class="flow-block" style="border-left-color: var(--red);">
-    <div class="section-label">
-      <span class="section-num" style="background: var(--red); color: #fff;">YT</span>
-      <span class="section-title" style="color: var(--red);">YouTube — Live + Cortes</span>
-      <span class="section-date">construção do canal</span>
-    </div>
-    <div class="section-desc">// Hub de conteúdo longo. Lives no dia do evento + cortes editados depois.</div>
+  <div class="camp-grid">
 
-    <div class="cards-grid">
-      <div class="card red">
-        <span class="card-icon">🎬</span>
-        <div class="card-title">Setup do Canal · 24–31/05</div>
-        <div class="card-body">
-          Criar canal <strong>@warpedrpg</strong> no YouTube.<br>
-          Banner + descrição + playlist "Iniciativa RPG 2026".<br>
-          Capa coordenada com identidade Warped.
-        </div>
-        <div class="tags">
-          <span class="tag red">Setup</span>
-          <span class="tag">Branding</span>
-        </div>
-      </div>
-
-      <div class="card red">
-        <span class="card-icon">🔴</span>
-        <div class="card-title">Lives ao Vivo · 05–07/06</div>
-        <div class="card-body">
-          Live diária do evento (3 lives total): <strong>partidas ao vivo no stand</strong>, mestres conduzindo, participantes jogando.<br>
-          Anunciar horários nos Stories.
-        </div>
-        <div class="tags">
-          <span class="tag red">Live</span>
-          <span class="tag">Cross-promo Stories</span>
-        </div>
-      </div>
-
-      <div class="card red">
-        <span class="card-icon">✂️</span>
-        <div class="card-title">Cortes Curtos · 08–20/06</div>
-        <div class="card-body">
-          Shorts de 30–60s extraídos das lives: melhores momentos, reações, lances inesperados.<br>
-          Distribuir 1 corte por dia.
-        </div>
-        <div class="tags">
-          <span class="tag red">Shorts</span>
-          <span class="tag green">Algoritmo YouTube</span>
-        </div>
-      </div>
-
-      <div class="card red">
-        <span class="card-icon">🎙</span>
-        <div class="card-title">Entrevistas Participantes · 10–20/06</div>
-        <div class="card-body">
-          Vídeos de 3–5min com entrevistas de quem jogou no stand: experiência, primeira impressão, retornaria?<br>
-          Funciona como <strong>prova social longa</strong>.
-        </div>
-        <div class="tags">
-          <span class="tag red">Entrevista</span>
-          <span class="tag">Depoimento</span>
-        </div>
+    <div class="camp-card cam-a">
+      <div class="camp-name"><span class="camp-id">CAM A</span> Crescimento Instagram (BR)</div>
+      <div class="camp-meta">
+        <div><span class="k">Fase</span><span class="v">F1 · Reconhecimento</span></div>
+        <div><span class="k">Objetivo</span><span class="v">Engajamento → otimizar pra Seguidores da Página</span></div>
+        <div><span class="k">Geo</span><span class="v">Brasil · sem restrição geográfica</span></div>
+        <div><span class="k">Idade</span><span class="v">18–40 anos</span></div>
+        <div><span class="k">Interesses</span><span class="v">D&amp;D, Tormenta, Critical Role, RPG de mesa, jogos analógicos, board games, fantasia, Stranger Things, cultura geek</span></div>
+        <div><span class="k">Comportamento</span><span class="v">Engajou com páginas/criadores de RPG nos últimos 90 dias</span></div>
+        <div><span class="k">Formato</span><span class="v">Feed 1:1 + Reels 9:16 + Carrossel</span></div>
+        <div><span class="k">CTA</span><span class="v">Seguir página · Visitar perfil</span></div>
+        <div><span class="k">KPI principal</span><span class="v">Custo por seguidor (CPS) · taxa de retenção 30d</span></div>
       </div>
     </div>
+
+    <div class="camp-card cam-b">
+      <div class="camp-name"><span class="camp-id">CAM B</span> Alcance Evento Rio (50km)</div>
+      <div class="camp-meta">
+        <div><span class="k">Fase</span><span class="v">F1 · Reconhecimento (geo-cirúrgica)</span></div>
+        <div><span class="k">Objetivo</span><span class="v">Alcance / Brand Awareness · otimizar Alcance Único</span></div>
+        <div><span class="k">Geo</span><span class="v">Rio de Janeiro + raio de 50km do local do evento</span></div>
+        <div><span class="k">Idade</span><span class="v">18–40 anos</span></div>
+        <div><span class="k">Interesses</span><span class="v">RPG de mesa, D&amp;D, Tormenta, jogos analógicos, board games, eventos geek, cultura nerd</span></div>
+        <div><span class="k">Frequência alvo</span><span class="v">3–5 impressões / pessoa na semana do evento</span></div>
+        <div><span class="k">Formato</span><span class="v">Feed 1:1 e 4:5 + Stories 9:16</span></div>
+        <div><span class="k">CTA</span><span class="v">Saber mais · Ver evento</span></div>
+        <div><span class="k">KPI principal</span><span class="v">Alcance único RJ · frequência · CPM local</span></div>
+      </div>
+    </div>
+
+    <div class="camp-card cam-c">
+      <div class="camp-name"><span class="camp-id">CAM C</span> Engajamento (Durante + Pós)</div>
+      <div class="camp-meta">
+        <div><span class="k">Fase</span><span class="v">F2 · Engajamento</span></div>
+        <div><span class="k">Objetivo</span><span class="v">Engajamento · otimizar ThruPlay + Interações</span></div>
+        <div><span class="k">Públicos</span><span class="v">Custom audience dos anúncios da Fase 1 (14d) + Lookalike 1% de seguidores + visitantes do perfil</span></div>
+        <div><span class="k">Geo</span><span class="v">Nacional (engajamento) + raio 3km do evento (Stories durante)</span></div>
+        <div><span class="k">Formato</span><span class="v">Stories 9:16 + Carrossel + Reels</span></div>
+        <div><span class="k">Resultado-chave</span><span class="v">Crescimento da Custom Audience (base pra ciclos futuros)</span></div>
+        <div><span class="k">KPI principal</span><span class="v">Engagements + ThruPlay 75% + tamanho da audiência criada</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CRIATIVOS POR MOMENTO ═══════════════════════════ -->
+<div class="section-block">
+  <div class="sb-head">
+    <span class="badge-red">Criativos</span>
+    <h3>Detalhamento criativo por momento</h3>
+    <span class="sb-sub">Fase 1 (mistério → revelação) · Fase 2 (presença → captura)</span>
   </div>
 
-  <!-- CONNECTOR -->
-  <div class="flow-connector-label">
-    <div class="flow-dot"></div>
-    <span class="fcl-badge">▼ cronograma de entrega</span>
+  <div class="crit-grid">
+
+    <div class="crit-card">
+      <div class="crit-tag">F1 · 24–27 mai</div>
+      <div class="crit-title">Teasers de Mistério (série de 3 posts)</div>
+      <div class="crit-meta">Estático 1:1 + Stories 9:16 · Cam B · RJ 50km</div>
+      <div class="crit-desc">3 imagens de locais conhecidos do Rio (Lapa, Urca, Tijuca, Centro histórico) <em>vazios</em>, sem texto explicativo. Pergunta-âncora: <em>"Você já esteve aqui antes?"</em>. Sem revelar produto, marca ou evento. O mistério é o produto — não explicar, deixar a dúvida trabalhar. Hashtags mínimas ou nenhuma.</div>
+    </div>
+
+    <div class="crit-card">
+      <div class="crit-tag">F1 · 28–29 mai</div>
+      <div class="crit-title">Revelação do Evento</div>
+      <div class="crit-meta">Estático 1:1 e 4:5 · Cam B · mesmo público dos teasers</div>
+      <div class="crit-desc">Conexão entre os teasers e o universo Warped. <em>"Algo está chegando ao Rio. Iniciativa RPG. 5 de junho."</em> Tom épico, não comercial — é um chamado. Quem viu os teasers reconhece imediatamente. Pode usar mesma estética dos locais vazios, agora com presença do universo Warped.</div>
+    </div>
+
+    <div class="crit-card">
+      <div class="crit-tag">F1 · 29 mai – 01 jun</div>
+      <div class="crit-title">Carrossel de Universo</div>
+      <div class="crit-meta">Carrossel 1:1 · 4–5 cards · Cam A (Followers)</div>
+      <div class="crit-desc">Card 1: gancho/pergunta pra fazer deslizar. Card 2: universo Warped (lore, atmosfera). Card 3: classes/personagens. Card 4: o que torna o jogo único. Card 5: CTA <em>"Siga @warped_rpg pra entrar no universo"</em>. Body text mais longo e narrativo — storytelling com progressão.</div>
+    </div>
+
+    <div class="crit-card">
+      <div class="crit-tag">F1 · D-7 e D-3</div>
+      <div class="crit-title">Stories de Contagem Regressiva</div>
+      <div class="crit-meta">Stories 9:16 · 2 versões · Cam B · RJ 50km</div>
+      <div class="crit-desc">2 versões: D-7 e D-3 do evento. Número grande de dias como destaque visual. Frases curtas, uma ideia por linha. Âncora geográfica: <em>"Rio de Janeiro · 5 de junho"</em>. CTA: ir até o perfil. Copy mínimo, design carrega a mensagem.</div>
+    </div>
+
+    <div class="crit-card f2">
+      <div class="crit-tag">F2 · 05–07 jun</div>
+      <div class="crit-title">Stories de Geolocalização</div>
+      <div class="crit-meta">Stories 9:16 · diário · raio 3km do evento</div>
+      <div class="crit-desc">Foto do stand tirada no próprio dia + texto sobreposto. Pessoas no raio 3km recebem convite direto: <em>"Estamos aqui agora", "Você está perto", "Venha nos encontrar"</em>. 1 versão por dia (dia 1, 2 e 3) com mesmo layout, ajustar texto. Designer monta na hora com material captado.</div>
+    </div>
+
+    <div class="crit-card f2">
+      <div class="crit-tag">F2 · 05–07 jun</div>
+      <div class="crit-title">Carrossel do Stand (ao vivo)</div>
+      <div class="crit-meta">Carrossel 1:1 · 4 cards com fotos reais</div>
+      <div class="crit-desc">Prova social em tempo real: pessoas jogando, mestres conduzindo, atmosfera do universo Warped no stand. Cada card uma cena diferente. Body text mais longo conta o que está acontecendo. Cards complementam fotos — não descrevem o que aparece.</div>
+    </div>
+
+    <div class="crit-card f2">
+      <div class="crit-tag">F2 · 09–15 jun</div>
+      <div class="crit-title">Cortes Reels Pós-Evento</div>
+      <div class="crit-meta">Reels 9:16 · 30–60s · Cam C (Engajamento)</div>
+      <div class="crit-desc">Vídeos curtos com melhores momentos + entrevistas curtas de participantes. Impulsionar pra <em>engajamento</em>, não follower — objetivo é construir custom audience. Explorar emoção: empolgação, conexão, diversão real.</div>
+    </div>
+
+    <div class="crit-card f2">
+      <div class="crit-tag">F2 · 12–15 jun</div>
+      <div class="crit-title">Highlights Estáticos</div>
+      <div class="crit-meta">Estático 1:1 e 4:5 · Feed · Cam C</div>
+      <div class="crit-desc">Imagens estáticas com depoimentos curtos de participantes ("achei sensacional", "voltaria amanhã", etc). Recap visual da experiência Warped. Reforça presença da marca pra quem acompanhou online mas não foi.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════ YOUTUBE ═══════════════════════════ -->
+<div class="section-block">
+  <div class="sb-head">
+    <span class="badge-red" style="background:#FF0000">YouTube</span>
+    <h3>Construção do canal · Lives + Cortes</h3>
+    <span class="sb-sub">Conteúdo longo · orgânico · sem mídia paga</span>
   </div>
 
-  <!-- ═══════════════════════════════════════ CRONOGRAMA ═══════ -->
-  <div class="flow-block">
-    <div class="section-label">
-      <span class="section-num">PLAN</span>
-      <span class="section-title">Cronograma de Veiculação</span>
-      <span class="section-date">24/05 → 20/06</span>
+  <div class="yt-grid">
+
+    <div class="yt-card">
+      <div class="yt-num">01</div>
+      <div class="yt-title">Setup do Canal · 24–31 mai</div>
+      <div class="yt-meta">F1 · Reconhecimento · pré-evento</div>
+      <div class="yt-desc">Criar canal <strong>@warpedrpg</strong>. Banner + descrição + foto de perfil coordenados com identidade Warped. Playlist "Iniciativa RPG 2026" preparada. Capa estilizada no universo. Tudo pronto antes do evento para começar a publicar com a marca consolidada.</div>
     </div>
-    <div class="section-desc">// Linha do tempo macro — quando cada peça entra no ar.</div>
 
-    <div class="cards-grid">
-      <div class="card">
-        <span class="card-icon">📅</span>
-        <div class="card-title">Semana 1 · 24–31/05</div>
-        <div class="card-body">
-          • Teasers de mistério (3 posts)<br>
-          • Setup canal YouTube<br>
-          • Início Campanha A (Followers BR)<br>
-          • Início Campanha B (Alcance RJ 50km)
-        </div>
-      </div>
-
-      <div class="card orange">
-        <span class="card-icon">⚡</span>
-        <div class="card-title">Semana 2 · 01–04/06</div>
-        <div class="card-body">
-          • Revelação do evento<br>
-          • Carrossel do universo Warped<br>
-          • Stories contagem D-3<br>
-          • Aumentar verba Campanha B (frequência alta)
-        </div>
-      </div>
-
-      <div class="card red">
-        <span class="card-icon">🎮</span>
-        <div class="card-title">Semana 3 · 05–07/06 · EVENTO</div>
-        <div class="card-body">
-          • Stories geolocalização 3km (diário)<br>
-          • Carrossel do stand<br>
-          • Lives YouTube diárias<br>
-          • Coleta de depoimentos
-        </div>
-      </div>
-
-      <div class="card green">
-        <span class="card-icon">📲</span>
-        <div class="card-title">Semana 4 · 08–20/06 · PÓS</div>
-        <div class="card-body">
-          • Cortes Reels do evento<br>
-          • Shorts YouTube diários<br>
-          • Entrevistas longas YouTube<br>
-          • Highlights estáticos<br>
-          • Campanha C (Engajamento) em alta
-        </div>
-      </div>
+    <div class="yt-card">
+      <div class="yt-num">02</div>
+      <div class="yt-title">Trailers + Convite · 30 mai – 04 jun</div>
+      <div class="yt-meta">F1 · pré-evento · cross-promo Stories</div>
+      <div class="yt-desc">2–3 vídeos curtos (60–90s) apresentando o universo Warped + convite específico pra Iniciativa RPG. Anunciar no Instagram com link na bio. Servem como teaser longo e preparam audiência pra acompanhar lives.</div>
     </div>
+
+    <div class="yt-card">
+      <div class="yt-num">03</div>
+      <div class="yt-title">Lives Diárias · 05–07 jun</div>
+      <div class="yt-meta">F2 · DURANTE evento · 1 live/dia</div>
+      <div class="yt-desc">Transmissão ao vivo do stand: partidas em andamento, mestres conduzindo, participantes jogando, atmosfera. 3 lives no total (1 por dia). Horários anunciados nos Stories Instagram. Conteúdo longo que fica indexado e gera descoberta orgânica longo prazo.</div>
+    </div>
+
+    <div class="yt-card">
+      <div class="yt-num">04</div>
+      <div class="yt-title">Shorts · 08–20 jun</div>
+      <div class="yt-meta">F2 · pós-evento · 1 short/dia</div>
+      <div class="yt-desc">Shorts de 30–60s extraídos das lives: melhores momentos, reações de jogadores, lances inesperados, twists narrativos. Distribuir 1 corte por dia. Aproveita algoritmo do YouTube Shorts para descoberta. Cross-promo no Reels Instagram.</div>
+    </div>
+
+    <div class="yt-card">
+      <div class="yt-num">05</div>
+      <div class="yt-title">Entrevistas Longas · 10–20 jun</div>
+      <div class="yt-meta">F2 · pós-evento · 3–5 vídeos</div>
+      <div class="yt-desc">Vídeos de 3–5min com entrevistas de quem jogou no stand: como foi a experiência, primeira impressão, retornaria? Funciona como <strong>prova social longa</strong> e ajuda novos visitantes do canal a entenderem o que é o Warped através do olhar real de jogadores.</div>
+    </div>
+
+    <div class="yt-card">
+      <div class="yt-num">06</div>
+      <div class="yt-title">Cross-promo permanente</div>
+      <div class="yt-meta">Sempre que houver novo conteúdo</div>
+      <div class="yt-desc">Cada novo vídeo do YouTube vira post/Story no Instagram com chamada pra assistir. Inscritos do canal viram base orgânica de longo prazo — separada da Custom Audience do Meta. Dois ativos em paralelo: público quente Meta + canal próprio YouTube.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CRONOGRAMA SEMANAL ═══════════════════════════ -->
+<div class="section-block">
+  <div class="sb-head">
+    <span class="badge-red">Cronograma</span>
+    <h3>Veiculação semanal · 24/05 → 20/06</h3>
+    <span class="sb-sub">4 semanas · linha do tempo macro</span>
   </div>
 
-  <!-- CONNECTOR -->
-  <div class="flow-connector-label">
-    <div class="flow-dot"></div>
-    <span class="fcl-badge">▼ resumo de campanhas meta ads</span>
+  <div class="week-grid">
+
+    <div class="week-card">
+      <div class="week-head"><span class="wn">Semana 1</span><span class="wd">24–31 mai</span></div>
+      <ul>
+        <li><strong>Setup</strong> · canal YouTube + perfil otimizado</li>
+        <li><strong>Teasers</strong> · 3 estáticos misteriosos</li>
+        <li><strong>Início Cam A</strong> · Followers BR</li>
+        <li><strong>Início Cam B</strong> · Alcance RJ 50km</li>
+        <li>Verba <strong>baixa</strong> · aprendizado dos públicos</li>
+      </ul>
+    </div>
+
+    <div class="week-card w2">
+      <div class="week-head"><span class="wn">Semana 2</span><span class="wd">01–04 jun</span></div>
+      <ul>
+        <li><strong>Revelação</strong> do evento</li>
+        <li><strong>Carrossel</strong> do universo Warped</li>
+        <li><strong>Stories contagem</strong> D-3</li>
+        <li><strong>Trailer</strong> YouTube + cross-promo</li>
+        <li>Verba <strong>alta</strong> na Cam B · frequência elevada</li>
+      </ul>
+    </div>
+
+    <div class="week-card w3">
+      <div class="week-head"><span class="wn">Semana 3</span><span class="wd">05–07 jun · EVENTO</span></div>
+      <ul>
+        <li><strong>Stories geo 3km</strong> · diário</li>
+        <li><strong>Carrossel do stand</strong> ao vivo</li>
+        <li><strong>Lives YouTube</strong> · 1 por dia</li>
+        <li>Coleta de fotos + depoimentos</li>
+        <li>Pico de mídia · cobertura máxima</li>
+      </ul>
+    </div>
+
+    <div class="week-card w4">
+      <div class="week-head"><span class="wn">Semana 4</span><span class="wd">08–20 jun · PÓS</span></div>
+      <ul>
+        <li><strong>Cortes Reels</strong> · melhores momentos</li>
+        <li><strong>Shorts YouTube</strong> · diários</li>
+        <li><strong>Entrevistas longas</strong> · 3–5 vídeos</li>
+        <li><strong>Highlights estáticos</strong> com depoimentos</li>
+        <li><strong>Cam C</strong> · engajamento em alta · custom audience cresce</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════ MÉTRICAS QUE IMPORTAM ═══════════════════════════ -->
+<div class="section-block">
+  <div class="sb-head">
+    <span class="badge-red">Indicadores</span>
+    <h3>O que medir · sem métricas de venda</h3>
+    <span class="sb-sub">Trabalho do zero · sem baseline · estabelece referência</span>
   </div>
 
-  <!-- ═══════════════════════════════════════ RESUMO CAMPANHAS ═══════ -->
-  <div class="flow-block">
-    <div class="section-label">
-      <span class="section-num">META</span>
-      <span class="section-title">Estrutura de Campanhas no Gerenciador</span>
-      <span class="section-date">3 campanhas · sem conversão</span>
-    </div>
-    <div class="section-desc">// Como configurar no Business Manager.</div>
+  <div class="camp-grid">
 
-    <div class="cards-grid">
-      <div class="card">
-        <span class="card-icon">🅰️</span>
-        <div class="card-title">Campanha A · Followers BR</div>
-        <div class="card-body">
-          <strong>Objetivo:</strong> Engajamento<br>
-          <strong>Resultado otimizado:</strong> Seguidores da página<br>
-          <strong>Geo:</strong> Brasil (sem restrição)<br>
-          <strong>Idade:</strong> 18–40<br>
-          <strong>Interesses:</strong> RPG, D&amp;D, board games
-        </div>
-        <div class="tags"><span class="tag">FASE 1</span><span class="tag green">Reconhecimento</span></div>
-      </div>
-
-      <div class="card blue">
-        <span class="card-icon">🅱️</span>
-        <div class="card-title">Campanha B · Alcance RJ 50km</div>
-        <div class="card-body">
-          <strong>Objetivo:</strong> Alcance<br>
-          <strong>Resultado otimizado:</strong> Alcance único<br>
-          <strong>Geo:</strong> Rio de Janeiro + 50km<br>
-          <strong>Idade:</strong> 18–40<br>
-          <strong>Interesses:</strong> RPG, eventos geek
-        </div>
-        <div class="tags"><span class="tag blue">FASE 1</span><span class="tag blue">Local</span></div>
-      </div>
-
-      <div class="card green">
-        <span class="card-icon">🅲</span>
-        <div class="card-title">Campanha C · Engajamento</div>
-        <div class="card-body">
-          <strong>Objetivo:</strong> Engajamento<br>
-          <strong>Resultado otimizado:</strong> ThruPlay + Interações<br>
-          <strong>Públicos:</strong> Custom audience Fase 1 + Lookalike 1% seguidores<br>
-          <strong>Geo:</strong> BR + raio 3km (stories durante evento)
-        </div>
-        <div class="tags"><span class="tag green">FASE 2</span><span class="tag green">Public. de remarketing</span></div>
+    <div class="camp-card cam-a">
+      <div class="camp-name"><span class="camp-id">A</span> Crescimento perfil</div>
+      <div class="camp-meta">
+        <div><span class="k">Métrica</span><span class="v">Novos seguidores / semana</span></div>
+        <div><span class="k">Métrica</span><span class="v">Custo por seguidor (CPS)</span></div>
+        <div><span class="k">Métrica</span><span class="v">Taxa de retenção 30d</span></div>
+        <div><span class="k">Métrica</span><span class="v">Origem do follow (pago vs orgânico)</span></div>
+        <div><span class="k">Nota</span><span class="v">Sem histórico — primeiro ciclo estabelece baseline pra próximos</span></div>
       </div>
     </div>
+
+    <div class="camp-card cam-b">
+      <div class="camp-name"><span class="camp-id">B</span> Alcance local RJ</div>
+      <div class="camp-meta">
+        <div><span class="k">Métrica</span><span class="v">Alcance único 50km</span></div>
+        <div><span class="k">Métrica</span><span class="v">Frequência média na semana</span></div>
+        <div><span class="k">Métrica</span><span class="v">CPM RJ vs CPM BR</span></div>
+        <div><span class="k">Métrica</span><span class="v">Cliques no perfil vindos de RJ</span></div>
+        <div><span class="k">Nota</span><span class="v">Captação visual do stand (estimativa)</span></div>
+      </div>
+    </div>
+
+    <div class="camp-card cam-c">
+      <div class="camp-name"><span class="camp-id">C</span> Engajamento + YouTube</div>
+      <div class="camp-meta">
+        <div><span class="k">Meta</span><span class="v">Reações + salvamentos + compart.</span></div>
+        <div><span class="k">Meta</span><span class="v">ThruPlay (vídeo &gt;75%)</span></div>
+        <div><span class="k">Meta</span><span class="v">Tamanho da Custom Audience criada</span></div>
+        <div><span class="k">YouTube</span><span class="v">Inscritos novos · viewers das lives · watch time Shorts</span></div>
+        <div><span class="k">Nota</span><span class="v">Indicador de saúde do funil pré-conversão</span></div>
+      </div>
+    </div>
+
   </div>
+</div>
 
-  <!-- CONNECTOR -->
-  <div class="flow-connector-label">
-    <div class="flow-dot"></div>
-    <span class="fcl-badge">▼ kpis &amp; metas</span>
+<!-- ═══════════════════════════ INVESTIMENTO ═══════════════════════════ -->
+<div class="budget-strip">
+  <div class="budget-head">
+    <div class="badge-red">Investimento Sugerido</div>
+    <h4>Mídia paga do ciclo · 24/05 → 20/06 (~4 semanas)</h4>
   </div>
-
-  <!-- ═══════════════════════════════════════ KPIs ═══════ -->
-  <div class="flow-block" style="border-left-color: var(--purple);">
-    <div class="section-label">
-      <span class="section-num" style="background: var(--purple); color: #000;">KPI</span>
-      <span class="section-title" style="color: var(--purple);">Métricas que importam</span>
-      <span class="section-date">por fase</span>
+  <div class="budget-grid">
+    <div class="budget-total">
+      <div class="budget-lbl">Budget total ciclo</div>
+      <div class="budget-val">R$ <span>2.000</span></div>
+      <div class="budget-sub">Trabalho do zero · sem métricas baseline. Primeiro ciclo estabelece referência pra ciclos futuros</div>
     </div>
-    <div class="section-desc">// O que olhar no relatório semanal — sem métricas de venda.</div>
 
-    <div class="cards-grid">
-      <div class="card purple">
-        <span class="card-icon">📈</span>
-        <div class="card-title">Crescimento perfil</div>
-        <div class="card-body">
-          • Novos seguidores por semana<br>
-          • Custo por seguidor (CPS)<br>
-          • Taxa de retenção 30d<br>
-          • Origem do follow (anúncio vs orgânico)
+    <div class="split-cards">
+      <div class="split-card" style="border-color:rgba(8,102,255,0.30)">
+        <div class="split-card-head">
+          <div class="icon-tile brand-meta"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path fill="#fff" d="M16.65 12.45h-2.96V21h-3.5v-8.55H8.05V9.5h2.14V7.65c0-2.27 1.18-3.6 3.79-3.6h2.18v2.95h-1.36c-.96 0-1.11.46-1.11 1.17V9.5h2.49l-.53 2.95z"/></svg></div>
+          <div class="split-card-name">Meta Ads</div>
+          <div class="split-card-pct">100%</div>
         </div>
+        <div class="split-card-val">R$ <span>2.000</span></div>
+        <div class="split-card-desc">Distribuído entre Cam A (Followers) · Cam B (Alcance RJ 50km) · Cam C (Engajamento)</div>
       </div>
-
-      <div class="card purple">
-        <span class="card-icon">📍</span>
-        <div class="card-title">Alcance local RJ</div>
-        <div class="card-body">
-          • Alcance único 50km<br>
-          • Frequência média na semana do evento<br>
-          • CPM RJ vs CPM BR<br>
-          • Cliques no perfil vindos de RJ
+      <div class="split-card" style="border-color:rgba(255,0,0,0.28)">
+        <div class="split-card-head">
+          <div class="icon-tile brand-yt"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="3.5" fill="#FF0000"/><path d="M10 9l5.5 3L10 15V9z" fill="#fff"/></svg></div>
+          <div class="split-card-name">YouTube</div>
+          <div class="split-card-pct">orgânico</div>
         </div>
+        <div class="split-card-val">R$ <span>0</span></div>
+        <div class="split-card-desc">Construção do canal · lives · shorts · entrevistas sem mídia paga</div>
       </div>
-
-      <div class="card purple">
-        <span class="card-icon">💬</span>
-        <div class="card-title">Engajamento</div>
-        <div class="card-body">
-          • Reações, salvamentos, compartilhamentos<br>
-          • ThruPlay (vídeo &gt;75%)<br>
-          • Tamanho da custom audience criada<br>
-          • Comentários qualificados (intenção real)
+      <div class="split-card" style="border-color:var(--line)">
+        <div class="split-card-head">
+          <div class="icon-tile dark"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8A8A95" stroke-width="1.7"/><path d="M12 7v5l3 2" stroke="#8A8A95" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+          <div class="split-card-name">Próximo ciclo</div>
+          <div class="split-card-pct">a definir</div>
         </div>
-      </div>
-
-      <div class="card purple">
-        <span class="card-icon">🎥</span>
-        <div class="card-title">YouTube</div>
-        <div class="card-body">
-          • Inscritos novos no canal<br>
-          • Visualizações totais lives<br>
-          • Watch time médio Shorts<br>
-          • CTR thumbnails entrevistas
-        </div>
+        <div class="split-card-val">depois</div>
+        <div class="split-card-desc">Com baseline deste ciclo, definir verba ajustada pra ciclo de conversão (Catarse, lançamento)</div>
       </div>
     </div>
   </div>
+</div>
 
-</main>
-
-<footer>
-  Documento preparado pela V4 Company · Warped RPG (Starlit Studios) · Maio 2026<br>
-  // RECONHECIMENTO + ENGAJAMENTO — SEM CONVERSÃO
-</footer>
+<!-- FOOTER -->
+<div class="footer">
+  <div><strong>V4 Company Dantas</strong> · Nosso negócio é vender o seu</div>
+  <div>Documento estratégico · Warped RPG · 1 de 1</div>
+</div>
 
 <script>
-  // Countdown para 05/06/2026 às 10:00 local
   const target = new Date('2026-06-05T10:00:00-03:00').getTime();
-  function tick() {
+  function tick(){
     const now = Date.now();
     let diff = Math.max(0, target - now);
     const d = Math.floor(diff / 86400000); diff %= 86400000;
     const h = Math.floor(diff / 3600000);  diff %= 3600000;
     const m = Math.floor(diff / 60000);    diff %= 60000;
     const s = Math.floor(diff / 1000);
-    document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
-    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
-    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
   }
-  tick();
-  setInterval(tick, 1000);
+  tick(); setInterval(tick, 1000);
 </script>
 
 </body>
